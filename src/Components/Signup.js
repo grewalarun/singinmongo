@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import axios from "axios";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -38,12 +38,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-var dd=0;
-
-
-
+var dd='';
 export default function Signup() {
-  const[em,setEm]= useState({em:''});
+  const[em,setEm]= useState(0);
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
@@ -65,8 +62,6 @@ export default function Signup() {
            
       });
   };
- 
-console.log(dd);
 
   const classes = useStyles();
   return (
