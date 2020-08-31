@@ -1,24 +1,36 @@
 import React from 'react';
-import logo from './logo.svg';
+import { BrowserRouter as Router, Route, Switch, NavLink } from "react-router-dom";
 import './App.css';
+import Signin from './Components/Signin'; 
+import Signup from './Components/Signup'; 
+import Profile from './Components/Profile'; 
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      Sign in / Signup with mongodb
       </header>
+      <Router>
+          <ul className="main-nav">
+            <li>
+              <NavLink exact to={{ pathname: "/" }}>Sign in</NavLink>
+            </li>
+            <li>
+              <NavLink exact to={{ pathname: "/Signup" }}>Sign up</NavLink>
+            </li>
+            <li>
+              <NavLink exact to={{ pathname: "/Profile" }}>Profile</NavLink>
+            </li>
+          </ul>
+          <Switch>
+            <Route path="/" exact strict component={Signin} />
+            <Route path="/Signup" exact strict component={Signup} />
+            <Route path="/Profile" exact strict component={Profile} />
+            <Route component={() => (<div>404 Not found </div>)} />
+          </Switch>
+        </Router>
+
     </div>
   );
 }
