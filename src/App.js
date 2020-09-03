@@ -4,6 +4,7 @@ import './App.css';
 import Signin from './Components/Signin'; 
 import Signup from './Components/Signup'; 
 import Profile from './Components/Profile'; 
+import Logout from './Components/Logout'; 
 
 function App() {
   return (
@@ -22,11 +23,15 @@ function App() {
             <li>
               <NavLink exact to={{ pathname: "/Profile" }}>Profile</NavLink>
             </li>
+            <li>
+              <NavLink exact to={{ pathname: "/Logout" }}>Logout</NavLink>
+            </li>
           </ul>
           <Switch>
             <Route path="/" exact strict component={Signin} />
             <Route path="/Signup" exact strict component={Signup} />
             <Route path="/Profile" exact strict component={Profile} />
+            <Route path="/Logout" exact strict component={Logout} />
             <Route component={() => (<div>404 Not found </div>)} />
           </Switch>
         </Router>

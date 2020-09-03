@@ -12,12 +12,15 @@ import {
   Switch,
   NavLink,
   Link,
+  useHistory
 } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import AddBoxOutlinedIcon from "@material-ui/icons/AddBoxOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -44,9 +47,10 @@ export default function Signup() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:3000/api/users/signup", {
-        userName: event.target.username.value,
+      .post("http://localhost:2500/api/users/signup", {
+        name: event.target.name.value,
         email: event.target.email.value,
+        phone: event.target.phone.value,
         password: event.target.password.value,
       })
       .then((response) => {
@@ -64,6 +68,8 @@ export default function Signup() {
   };
 
   const classes = useStyles();
+ 
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -80,13 +86,13 @@ export default function Signup() {
             margin="normal"
             required
             fullWidth
-            id="username"
-            label="User Name"
-            name="username"
-            autoComplete="current-username"
+            id="name"
+            label="Name"
+            name="name"
+            autoComplete="current-name"
             autoFocus
           />
-{dd!=0?dd.filter(v=>v.path[0]=="userName").map(a=>a.message):""}
+{dd!=0?dd.filter(v=>v.path[0]=="name").map(a=>a.message):""}
           <TextField
             variant="outlined"
             margin="normal"
@@ -97,6 +103,16 @@ export default function Signup() {
             name="email"
           />
 {dd!=0?dd.filter(v=>v.path[0]=="email").map(a=>a.message):""}
+<TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="phone"
+            label="Phone"
+            name="phone"
+          />
+{dd!=0?dd.filter(v=>v.path[0]=="phone").map(a=>a.message):""}
           <TextField
             variant="outlined"
             margin="normal"

@@ -8,13 +8,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 //import Link from '@material-ui/core/Link';
-import { BrowserRouter as Router, Route, Switch, NavLink,Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, NavLink,Link, useHistory } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -35,26 +34,33 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(3, 0, 2),
   },
 }));
-
-
-  
  var dd='';
+
+
+
 
 export default function Signin() {
     const classes = useStyles();
-
+    const history = useHistory();
     const[em,setEm]= useState(0);
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(event.target.email.value)          // email
         console.log(event.target.password.value)          // password
-        axios.post('http://localhost:3000/api/users/signin', {userName:event.target.email.value,password:event.target.password.value})
+        axios.post('http://localhost:2500/api/users/signin', {userName:event.target.email.value,password:event.target.password.value})
         .then(res => {
-            console.log(res);
+            alert(res.headers['x-auth-token']);
+            localStorage.setItem('ab', 'ab');
+            history.push(
+                {
+                    pathname:"/profile",
+                    state:{name:"arun"}
+            
+            });
+
           })
           .catch((err) => {
             console.log(err.response.data); // you can get the response like this
-           // console.log(err.response.status); // status code of the request
             dd=err.response.data;
                 setEm({
                 em:dd
@@ -62,6 +68,18 @@ export default function Signin() {
                
           });
       } 
+
+var ax = localStorage.getItem('ab')
+if(ax=='ab'){
+    history.push(
+        {
+            pathname:"/profile",
+            state:{name:"arun"}
+    
+    });
+}
+console.log("--------");
+console.log(ax);
 console.log(em);
 
   return (
@@ -74,7 +92,7 @@ console.log(em);
         <Typography component="h1" variant="h5">
           Sign In
         </Typography>
-        {dd}
+        <span className="text-red">{dd}</span>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -114,7 +132,7 @@ console.log(em);
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link href="#" variant="body2">
+              <Link to="/" href="#" variant="body2">
                 Forgot password?
               </Link>
             </Grid>
