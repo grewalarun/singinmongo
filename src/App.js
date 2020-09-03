@@ -21,7 +21,7 @@ function App() {
               <NavLink exact to={{ pathname: "/Signup" }}>Sign up</NavLink>
             </li>
             <li>
-              <NavLink exact to={{ pathname: "/Profile" }}>Profile</NavLink>
+              <NavLink to={{ pathname: "/Profile/" }}>Profile</NavLink>
             </li>
             <li>
               <NavLink exact to={{ pathname: "/Logout" }}>Logout</NavLink>
@@ -30,7 +30,7 @@ function App() {
           <Switch>
             <Route path="/" exact strict component={Signin} />
             <Route path="/Signup" exact strict component={Signup} />
-            <Route path="/Profile" exact strict component={Profile} />
+            <Route path="/Profile/" component={Profile} />
             <Route path="/Logout" exact strict component={Logout} />
             <Route component={() => (<div>404 Not found </div>)} />
           </Switch>
